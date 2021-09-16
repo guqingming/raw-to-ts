@@ -1,0 +1,117 @@
+// Place your settings in this file to overwrite default and user settings.
+{
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.DS_Store": true
+  },
+  "easysass.compileAfterSave": false,
+  "beautify.config": {
+    "brace_style": "collapse,preserve-inline",
+    "indent_size": 2,
+    "end_with_newline": true,
+    "html": {
+      "wrap_attributes": "auto"
+    },
+    "css": {
+      "space_around_combinator": true,
+      "selector_separator_newline": true
+    }
+  },
+  "beautify.language": {
+    "js": {
+      "type": [
+        "javascript",
+        "json",
+        "typescript"
+      ],
+      "filename": [
+        ".jshintrc",
+        ".jsbeautify"
+      ]
+    },
+    "css": [
+      "css",
+      "scss",
+      "wxss"
+    ],
+    "html": [
+      "wxml",
+      "htm",
+      "html"
+    ],
+    "[vue]": {
+      "editor.defaultFormatter": "HookyQR.beautify"
+    }
+  },
+  "explorer.confirmDelete": false,
+  "less.compile": {
+    "compress": true, // 是否删除多余空白字符
+    // "sourceMap": true, // 是否创建文件目录树，true的话会自动生成一个 .css.map 文件
+    "out": "${workspaceRoot}//",
+    "outExt": ".css" // 输出文件的后缀,默认为.css
+  },
+  "editor.tabSize": 2,
+  "files.associations": {
+    "*.cjson": "jsonc",
+    "*.wxss": "css",
+    "*.less": "css",
+    "*.wxs": "javascript",
+    "*.wxml": "wxml"
+  },
+  "emmet.includeLanguages": {
+    "wxml": "html",
+    "vue": "html",
+    "v-html": "html"
+  },
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "minapp-vscode.disableAutoConfig": true,
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "liveServer.settings.donotShowInfoMsg": true,
+  "editor.detectIndentation": false,
+  "explorer.confirmDragAndDrop": false,
+  "[html]": {
+    "editor.defaultFormatter": "vscode.html-language-features"
+  },
+  "tslint.jsEnable": true,
+  "typescript.suggest.completeFunctionCalls": true,
+  "search.followSymlinks": false,
+  "editor.renderWhitespace": "all",
+  "liveServer.settings.CustomBrowser": "chrome",
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "files.autoSave": "off",
+  "git.confirmSync": false,
+  "gitlens.codeLens.scopes": [
+    "document"
+  ],
+  "explorer.compactFolders": false,
+  "explorer.incrementalNaming": "smart",
+  "workbench.preferredHighContrastColorTheme": "Default Dark+",
+  "tslint.autoFixOnSave": true,
+  "html.format.wrapAttributes": "force-expand-multiline",
+  "git.suggestSmartCommit": false,
+  "eslint.validate": [
+    "wxml",
+    "html",
+    "js",
+    "ts"
+  ],
+  "git.enableSmartCommit": true,
+  "css.lint.emptyRules": "ignore",
+  "editor.tokenColorCustomizations": {
+    "variables": {
+      "fontStyle": ""
+    }
+  },
+  "html.format.endWithNewline": true,
+  "files.insertFinalNewline": true,
+  "files.trimFinalNewlines": true,
+  "diffEditor.ignoreTrimWhitespace": false,
+  "vetur.validation.templateProps": true,
+  "vetur.experimental.templateInterpolationService": true,
+  "vetur.validation.interpolation": true
+}
