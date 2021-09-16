@@ -1,16 +1,13 @@
-![JSON TO TS](https://image.ibb.co/fTb60k/icon.png)
-
-# Json to TS
+# Raw to TS
 
 ### Convert json object to typescript interfaces
 
 # Example
 
-### [Try it Online](http://www.jsontots.com)
 ### Code
 
 ```javascript
-const RawToTs = require('json-to-ts')
+const RawToTs = require('raw-to-ts')
 
 const json = {
   cats: [
@@ -49,5 +46,5 @@ interface Cat {
 # Setup
 
 ```sh
-$ npm install --save json-to-ts
+$ npm install --save raw-to-ts
 ```
