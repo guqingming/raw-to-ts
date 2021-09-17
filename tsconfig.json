@@ -5,8 +5,8 @@
         "target": "es5",
         "noImplicitAny": false,
         "sourceMap": true,
-        "outDir": "./build",
-        "baseUrl": "./src",
+        "outDir": "build",
+        "baseUrl": "src",
         "lib": [
           "es2017",
           "dom"
