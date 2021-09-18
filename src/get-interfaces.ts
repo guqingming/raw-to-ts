@@ -85,7 +85,7 @@ function replaceTypeObjIdsWithNames(typeObj: { [index: string]: string }, names:
 export function getInterfaceStringFromDescription({ name, typeMap }: InterfaceDescription, json: any): string {
   const stringTypeMap = Object.entries(typeMap)
     .map(([key, name]) => {
-      return `  /** ${ findDesc(json, typeMap, key, name) } **/\n  ${key}: ${name};\n`
+      return `  /** ${ findDesc(json, typeMap, key, name) } */\n  ${key}: ${name};\n`
     })
     .reduce((a, b) => (a += b), '')
 

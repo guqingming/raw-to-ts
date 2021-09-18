@@ -91,5 +91,5 @@ function findSameObj(json: any, typeMap: object, returnObj: any = {}) {
 
 export function findDesc(json: any, typeMap: object, key: string, name: string) {
   const obj = findSameObj(json, typeMap)
-  return obj && obj[key] ? obj[key].description : '注释'
+  return obj && obj[key] ? obj[key].description || '注释' : '注释'
 }
