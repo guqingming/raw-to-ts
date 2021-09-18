@@ -12,7 +12,8 @@ export function setJson(json: any): any {
           obj[key] = `string`
         } else if (type === 'number') {
           obj[key] = 1
-        }if (type === 'boolean') {
+        }
+        if (type === 'boolean') {
           obj[key] = false
         } else if (type === 'array' && thisObj.items) {
           obj[key] = setJson(thisObj)
@@ -29,11 +30,15 @@ export function setJson(json: any): any {
           if (thisObj.type === 'integer') {
             type = 'number'
           }
+          if (thisObj.type === 'Date') {
+            type = 'string'
+          }
           if (type === 'string') {
             obj[key] = `string`
           } else if (type === 'number') {
             obj[key] = 1
-          }if (type === 'boolean') {
+          }
+          if (type === 'boolean') {
             obj[key] = false
           } else if (type === 'array' && thisObj.items) {
             obj[key] = setJson(thisObj)
@@ -43,7 +48,7 @@ export function setJson(json: any): any {
         }
       } else {
         obj = []
-        if (json.items.type === 'string') {
+        if (json.items.type === 'string' || json.items.type === 'Date') {
           obj.push('string')
         } else if (json.items.type === 'number' || json.items.type === 'integer') {
           obj.push(0)
@@ -72,24 +77,37 @@ function isSameObj(obj1, obj2) {
   return true
 }
 
-function findSameObj(json: any, typeMap: object, returnObj: any = {}) {
+function findSameObj(json: any, typeMap: object, returnObj: any = {}, originJson: any = {}) {
   for (let key in json.properties) {
     const obj = json.properties[key]
-    if (obj.type === 'string' || obj.type === 'number' || obj.type === 'boolean' || obj.type === 'integer') {
+    if (obj.type === 'string' || obj.type === 'number' || obj.type === 'boolean' || obj.type === 'integer' || obj.type === 'Date') {
       if (isSameObj(json.properties, typeMap)) {
         returnObj = json.properties
-        return json.properties
+        originJson = json
+        return { returnObj, originJson }
       }
     } else if (obj.type === 'object' && obj.properties) {
-      returnObj = findSameObj(obj, typeMap, returnObj)
+      const res = findSameObj(obj, typeMap, returnObj, originJson)
+      returnObj = res.returnObj
+      originJson = res.originJson
     } else if (obj.items) {
-      returnObj = findSameObj(obj.items, typeMap, returnObj)
+      const res = findSameObj(obj.items, typeMap, returnObj, originJson)
+      returnObj = res.returnObj
+      originJson = res.originJson
     }
   }
-  return returnObj
+  return { returnObj, originJson }
 }
 
 export function findDesc(json: any, typeMap: object, key: string, name: string) {
-  const obj = findSameObj(json, typeMap)
-  return obj && obj[key] ? obj[key].description || '注释' : '注释'
+  const { returnObj } = findSameObj(json, typeMap)
+  return returnObj && returnObj[key] ? returnObj[key].description || '注释' : '注释'
+}
+
+export function findRequired(json: any, typeMap: object, key: string, name: string) {
+  const { returnObj, originJson } = findSameObj(json, typeMap)
+  if (!returnObj || !originJson.properties || (returnObj && returnObj[key] && originJson.required && originJson.required.includes(key))) {
+    return true
+  }
+  return false
 }

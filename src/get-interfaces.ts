@@ -1,5 +1,5 @@
 import { InterfaceDescription, NameEntry, TypeStructure, KeyMetaData } from './model'
-import { findDesc } from './replace'
+import { findDesc, findRequired } from './replace'
 import { isHash, findTypeById, isNonArrayUnion } from './util'
 
 function isKeyNameValid(keyName: string) {
@@ -85,11 +85,15 @@ function replaceTypeObjIdsWithNames(typeObj: { [index: string]: string }, names:
 export function getInterfaceStringFromDescription({ name, typeMap }: InterfaceDescription, json: any): string {
   const stringTypeMap = Object.entries(typeMap)
     .map(([key, name]) => {
-      return `  /** ${ findDesc(json, typeMap, key, name) } */\n  ${key}: ${name};\n`
+      if (findRequired(json, typeMap, key, name)) {
+        return `  /** ${ findDesc(json, typeMap, key, name) } */\n  ${key}: ${name};\n`
+      } else {
+        return `  /** ${ findDesc(json, typeMap, key, name) } */\n  ${key} ?: ${name};\n`
+      }
     })
     .reduce((a, b) => (a += b), '')
 
-  let interfaceString = `interface ${name} {\n`
+  let interfaceString = `export interface ${ name } {\n`
   interfaceString += stringTypeMap
   interfaceString += '}'
 
