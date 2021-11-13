@@ -78,11 +78,12 @@ function isSameObj(obj1, obj2) {
 }
 
 function findSameObj(json: any, typeMap: object, returnObj: any = {}, originJson: any = {}) {
-  for (let key in json.properties) {
-    const obj = json.properties[key]
+  const properties = json.type === 'array' ? json.items.properties : json.properties;
+  for (let key in properties) {
+    const obj = properties[key]
     if (obj.type === 'string' || obj.type === 'number' || obj.type === 'boolean' || obj.type === 'integer' || obj.type === 'Date') {
-      if (isSameObj(json.properties, typeMap)) {
-        returnObj = json.properties
+      if (isSameObj(properties, typeMap)) {
+        returnObj = properties
         originJson = json
         return { returnObj, originJson }
       }
